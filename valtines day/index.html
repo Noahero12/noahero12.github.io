@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px;
+            position: relative;
+            z-index: 2; /* Ensure container is above photos */
+        }
+        h1 {
+            color: #ff4d4d;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: all 0.5s ease;
+        }
+        button:hover {
+            background-color: #ff1a1a;
+        }
+        .yes-button {
+            background-color: #ffe6e6;
+            color: #ff4d4d;
+            margin-left: -120px; /* Move the "Yes" button slightly to the right */
+        }
+        .yes-button:hover {
+            background-color: #ffcccc;
+        }
+        .no-button {
+            background-color: #cccccc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .no-button:hover {
+            background-color: #999999;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 5s infinite;
+            z-index: 3; /* Ensure hearts are above photos */
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: yellow;
+            border-radius: 50%;
+            animation: sparkle 1s infinite;
+            z-index: 3; /* Ensure sparkles are above photos */
+        }
+        @keyframes sparkle {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .photos {
+            position: absolute;
+            width: 250px; /* Increased size */
+            height: 250px; /* Increased size */
+            object-fit: cover;
+            border-radius: 10px;
+            z-index: 1; /* Ensure photos are at the bottom */
+        }
+        .photo-top-left {
+            top: 10px;
+            left: 10px;
+        }
+        .photo-top-right {
+            top: 10px;
+            right: 10px;
+        }
+        .photo-bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        .photo-bottom-right {
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will You Be My Valentine?</h1>
+        <p>My love,</p>
+        <p>Ever since that beautiful open day, you've taken my heart and run away with it, I couldn't imagine doing this with anyone else, I love you hun, always and forever <3 </p>
+        <div class="buttons">
+            <button id="yes-button" class="yes-button">Yes</button>
+            <button id="no-button" class="no-button">No</button>
+        </div>
+    </div>
+    <img src="/Users/zebaromeel/Downloads/1000006792 2.JPG" alt="Photo 1" class="photos photo-top-left">
+    <img src="/Users/zebaromeel/Downloads/1000006795.JPG" alt="Photo 2" class="photos photo-top-right">
+    <img src="/Users/zebaromeel/Downloads/1000006804.JPG" alt="Photo 3" class="photos photo-bottom-left">
+    <img src="/Users/zebaromeel/Downloads/1000006810.JPG" alt="Photo 4" class="photos photo-bottom-right">
+    <script>
+        let noButtonPressCount = 0;
+        const noButtonMessages = ["No 😢", "Pwease? 🥺", "Pweaty Pwease? 🥺🥺", "Pweaty Pwease with a spwinkles on top? 🥺🥺🥺", "Pweaty Pwease with a spwinkles and a chewyy on top? 🥺🥺🥺🥺"];
+
+        document.getElementById('yes-button').addEventListener('click', function() {
+            window.location.href = 'thankyou.html'; // Redirect immediately
+        });
+
+        document.getElementById('no-button').addEventListener('click', function() {
+            const yesButton = document.getElementById('yes-button');
+            const noButton = document.getElementById('no-button');
+            let currentScale = parseFloat(yesButton.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            currentScale *= 2;
+            yesButton.style.transform = `scale(${currentScale})`;
+            noButtonPressCount++;
+            if (noButtonPressCount >= 5) {
+                noButton.style.display = 'none';
+            } else {
+                noButton.textContent = noButtonMessages[noButtonPressCount];
+            }
+        });
+    </script>
+</body>
+</html>
